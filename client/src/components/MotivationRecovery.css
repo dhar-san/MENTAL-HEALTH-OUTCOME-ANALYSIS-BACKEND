@@ -1,0 +1,295 @@
+.motivation-recovery {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.motivation-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.motivation-header h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.motivation-subtitle {
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.motivation-message-section {
+  margin-bottom: 2.5rem;
+}
+
+.message-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.message-card h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.motivational-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+.professional-note {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: rgba(56, 189, 248, 0.1);
+  border-left: 4px solid #38bdf8;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.certificate-section {
+  margin-bottom: 2.5rem;
+}
+
+.certificate-section h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.certificate-preview-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.certificate-preview {
+  width: 100%;
+  max-width: 640px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(129, 140, 248, 0.3);
+}
+
+.certificate-inner {
+  padding: 1.5rem;
+}
+
+.certificate-border {
+  border: 3px double rgba(129, 140, 248, 0.5);
+  border-radius: 8px;
+  padding: 2.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.certificate-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.certificate-awarded {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.certificate-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 1rem;
+}
+
+.certificate-status {
+  font-size: 0.95rem;
+  color: #475569;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.certificate-status strong {
+  color: #6366f1;
+}
+
+.certificate-date {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+}
+
+.certificate-message {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.certificate-disclaimer {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 1rem;
+}
+
+.certificate-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: none;
+  background: var(--gradient-aurora);
+  color: white;
+  box-shadow: 0 4px 20px rgba(129, 140, 248, 0.35);
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(129, 140, 248, 0.45);
+}
+
+.btn-download.btn-secondary {
+  background: var(--bg-glass);
+  color: var(--text);
+  border: 1px solid var(--border-glass);
+}
+
+.btn-download.btn-secondary:hover {
+  background: rgba(129, 140, 248, 0.15);
+  border-color: rgba(129, 140, 248, 0.3);
+}
+
+.recommendations-section h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.rec-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.rec-card:hover {
+  border-color: rgba(129, 140, 248, 0.25);
+}
+
+.rec-card.physical { border-left: 4px solid #38bdf8; }
+.rec-card.mental { border-left: 4px solid #a78bfa; }
+.rec-card.nutritional { border-left: 4px solid #34d399; }
+
+.rec-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.rec-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rec-card li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.rec-card li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-1);
+  font-weight: bold;
+}
+
+.motivation-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.motivation-actions .btn-primary {
+  padding: 0.85rem 1.75rem;
+  background: var(--gradient-aurora);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.motivation-actions .btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.motivation-actions .btn-secondary {
+  padding: 0.85rem 1.75rem;
+  background: var(--bg-glass);
+  color: var(--text-soft);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.motivation-actions .btn-secondary:hover {
+  background: rgba(129, 140, 248, 0.1);
+  color: var(--text);
+}
