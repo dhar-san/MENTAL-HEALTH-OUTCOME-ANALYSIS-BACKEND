@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getAssessments,
   getAssessment,
+  getRandomQuestions,
   createAssessment,
   updateAssessment,
   deleteAssessment,
@@ -13,6 +14,7 @@ const { protect, authorize } = require('../middleware/auth');
 router.use(protect);
 
 router.get('/', getAssessments);
+router.get('/random-questions', getRandomQuestions);
 router.get('/:id', getAssessment);
 
 // Admin only

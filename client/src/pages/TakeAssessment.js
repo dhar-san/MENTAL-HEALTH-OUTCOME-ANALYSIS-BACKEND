@@ -1,12 +1,22 @@
 /**
  * Take Assessment - Complete questions and submit response
  * Automatically calculates score and categorizes severity
+ * Supports option shuffle and progress tracking
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api';
 import MotivationRecovery from '../components/MotivationRecovery';
 import './TakeAssessment.css';
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function TakeAssessment() {
   const { id } = useParams();
@@ -16,6 +26,33 @@ export default function TakeAssessment() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [shuffleMap, setShuffleMap] = useState({}); // qIdx -> [original indices in shuffled order]
+
+  const questions = useMemo(() => {
+    if (!assessment?.questions) return [];
+    return [...assessment.questions].sort((a, b) => (a.order || 0) - (b.order || 0));
+  }, [assessment]);
+
+  const [questionsWithShuffledOptions, setQuestionsWithShuffledOptions] = useState([]);
+
+  useEffect(() => {
+    if (questions.length === 0) return;
+    const withShuffle = questions.map((q) => {
+      const opts = q.options || [];
+      const indices = opts.map((_, i) => i);
+      const shuffledIndices = shuffleArray(indices);
+      return {
+        ...q,
+        shuffledOptions: shuffledIndices.map((i) => ({ ...opts[i], _originalIndex: i })),
+      };
+    });
+    setQuestionsWithShuffledOptions(withShuffle);
+    const map = {};
+    withShuffle.forEach((q, qIdx) => {
+      map[qIdx] = q.shuffledOptions.map((o) => o._originalIndex);
+    });
+    setShuffleMap(map);
+  }, [assessment?._id]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -31,8 +68,9 @@ export default function TakeAssessment() {
     fetch();
   }, [id]);
 
-  const handleAnswer = (qIdx, optIdx) => {
-    setAnswers((prev) => ({ ...prev, [qIdx]: optIdx }));
+  const handleAnswer = (qIdx, shuffledOptIdx) => {
+    const originalIdx = shuffleMap[qIdx]?.[shuffledOptIdx] ?? shuffledOptIdx;
+    setAnswers((prev) => ({ ...prev, [qIdx]: originalIdx }));
   };
 
   const handleSubmit = async (e) => {
@@ -74,42 +112,53 @@ export default function TakeAssessment() {
     );
   }
 
-  const questions = assessment.questions || [];
   const allAnswered = Object.keys(answers).length === questions.length;
+  const answeredCount = Object.keys(answers).length;
+  const progressPercent = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0;
 
   return (
     <div className="take-assessment">
       <h1>{assessment.title}</h1>
       {assessment.description && <p className="desc">{assessment.description}</p>}
+
+      <div className="progress-tracker">
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }} />
+        </div>
+        <span className="progress-text">Question {answeredCount} of {questions.length} answered</span>
+      </div>
+
       {error && <div className="error-msg">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <div className="questions">
-          {questions
-            .sort((a, b) => (a.order || 0) - (b.order || 0))
-            .map((q, qIdx) => (
-              <div key={qIdx} className="question-block">
-                <h3>
-                  {qIdx + 1}. {q.questionText}
-                </h3>
-                <div className="options">
-                  {(q.options || []).map((opt, optIdx) => (
+          {(questionsWithShuffledOptions.length > 0 ? questionsWithShuffledOptions : questions).map((q, qIdx) => (
+            <div key={qIdx} className="question-block">
+              <h3>
+                {qIdx + 1}. {q.questionText}
+              </h3>
+              <div className="options">
+                {(q.shuffledOptions || q.options || []).map((opt, optIdx) => {
+                  const originalIdx = opt._originalIndex ?? optIdx;
+                  const isSelected = answers[qIdx] === originalIdx;
+                  return (
                     <label
                       key={optIdx}
-                      className={`option ${answers[qIdx] === optIdx ? 'selected' : ''}`}
+                      className={`option ${isSelected ? 'selected' : ''}`}
                     >
                       <input
                         type="radio"
                         name={`q${qIdx}`}
-                        checked={answers[qIdx] === optIdx}
+                        checked={isSelected}
                         onChange={() => handleAnswer(qIdx, optIdx)}
                       />
                       <span>{opt.text}</span>
                     </label>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            ))}
+            </div>
+          ))}
         </div>
 
         <div className="submit-row">

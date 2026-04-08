@@ -14,7 +14,48 @@
 
 .assessment-list-page .subtitle {
   color: var(--text-soft);
+  margin-bottom: 1.5rem;
+}
+
+.quick-assessment-card {
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  border-radius: var(--radius);
+  padding: 2rem;
   margin-bottom: 2rem;
+}
+
+.quick-assessment-card h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.quick-assessment-card p {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.btn-quick {
+  padding: 0.85rem 1.5rem;
+}
+
+.quick-error {
+  color: var(--accent-4);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
 }
 
 .assessment-grid {
