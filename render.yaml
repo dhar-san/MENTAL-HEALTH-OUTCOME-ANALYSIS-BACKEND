@@ -6,7 +6,6 @@ services:
     name: mental-health-analytics-api
     branch: main
     plan: free
-    rootDir: server
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health

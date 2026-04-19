@@ -1,0 +1,8 @@
+{
+  "name": "mental-health-analytics-backend",
+  "private": true,
+  "scripts": {
+    "start": "node server/server.js",
+    "postinstall": "npm install --prefix server"
+  }
+}
