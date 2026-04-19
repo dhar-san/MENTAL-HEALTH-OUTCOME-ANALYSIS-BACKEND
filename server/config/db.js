@@ -5,10 +5,13 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-  const uri = process.env.MONGODB_URI;
-  if (!uri || typeof uri !== 'string' || !uri.trim()) {
+  const uri = (process.env.MONGODB_URI || process.env.DATABASE_URL || '').trim();
+  if (!uri) {
     console.error(
-      'Missing MONGODB_URI. Set it in Render: Dashboard → your Web Service → Environment → add MONGODB_URI (e.g. MongoDB Atlas connection string).'
+      'Missing MongoDB URI. In Render: open this Web Service (not only the Blueprint) → Environment → add one of:\n' +
+        '  MONGODB_URI=<your Atlas connection string>  (recommended)\n' +
+        '  DATABASE_URL=<same string>  (alias)\n' +
+        'Then Save and redeploy. Create a free cluster at https://www.mongodb.com/atlas if needed.'
     );
     process.exit(1);
   }
