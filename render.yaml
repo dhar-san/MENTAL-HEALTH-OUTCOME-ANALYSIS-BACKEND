@@ -1,0 +1,17 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Set MONGODB_URI in the Render Dashboard (e.g. MongoDB Atlas connection string).
+services:
+  - type: web
+    runtime: node
+    name: mental-health-analytics-api
+    branch: main
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
