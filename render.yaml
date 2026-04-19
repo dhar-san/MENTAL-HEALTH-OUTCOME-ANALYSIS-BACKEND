@@ -1,5 +1,5 @@
 # Render Blueprint: https://render.com/docs/blueprint-spec
-# Set MONGODB_URI in the Render Dashboard (e.g. MongoDB Atlas connection string).
+# Dashboard: set MONGODB_URI (MongoDB Atlas) and ALLOWED_ORIGINS (your Vercel URL(s), comma-separated).
 services:
   - type: web
     runtime: node
@@ -12,6 +12,8 @@ services:
     healthCheckPath: /api/health
     envVars:
       - key: MONGODB_URI
+        sync: false
+      - key: ALLOWED_ORIGINS
         sync: false
       - key: JWT_SECRET
         generateValue: true
